@@ -1,0 +1,58 @@
+<script>
+    function addRow() {
+        var tbody = document.getElementsByTagName("tbody")[0]
+        var row = tbody.insertRow()
+        row.setAttribute("id", "row" + parseInt(tbody.rows.length -1))
+        for (var i = 0; i < document.getElementsByTagName("tr")[0].cells.length; i++) {
+            var cell = row.insertCell()
+            cell.setAttribute("id", "cell" + i)
+            if (i !== 2) {
+                if (tbody.rows.length > 1) {
+                    cell.innerHTML = document.getElementById("cell" + i).innerHTML
+                } else {
+                    cell.innerHTML = "Celda " + (i + 1)
+                }
+            } else {
+                var button = document.createElement("button")
+                button.innerHTML = "X"
+                button.addEventListener("click", function () {
+                    deleteRow(row.getAttribute("id"))
+                })
+                cell.append(button)
+            }         
+        }
+    }
+    function deleteRow(rowId) {
+        document.getElementById(rowId).remove()
+    }
+</script>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <table style="border: 1px solid">
+        <thead>
+            <tr>
+                <th>Columna 0</th>
+                <th>Columna 1</th>
+                <th>Columna 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id= "row0">
+                <td id="cell0">Celda 1</td>
+                <td id="cell1">Celda 2</td>
+                <td id="cell2"><button onclick="deleteRow(this.parentElement.parentElement.getAttribute('id'))">X</button></td>
+            </tr>
+        </tbody>
+    </table>
+<br>
+<button onclick="addRow()">Anadir Fila</button>
+
+</body>
+</html>

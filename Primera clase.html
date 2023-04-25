@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<style>
+    table, tr, td {
+        border: 1px solid
+    }
+</style>
+
+<script>
+    function test1() {
+        alert("Hola Mundo!")
+    }
+
+    function test2() {
+        document.getElementById("texto").innerHTML = "Get Element By Id"
+    }
+
+    function test3() {
+        var arr = document.getElementsByTagName("h4")
+        for (x = 0; x < arr.length; x++) {
+            arr[x].innerHTML = "Arreglo posicion " + x
+        }
+    } 
+    function test4() {
+        var elementos = document.getElementsByTagName("h4")
+        for (y = 0; y < elementos.length; y++) {
+            elementos[y].innerHTML = "Eliminado"
+        }
+    }
+</script>
+
+<table>
+    <tr>
+        <td>
+            <h4 id="texto" onclick="test2()">TEST1</h4>
+        </td>
+        <td>
+            <h4 onclick="test3()">TEST2</h4>
+        </td>
+        <td>
+            <img src="test_img.jpg" width="200" height="200" onclick="test1()">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h4>TEST3</h4>
+        </td>
+        <td>
+            <h4 onclick="test3()">TEST4</h4>            
+        </td>
+        <td>
+            <img src="1.jpeg" width="200" height="200" onclick="test4()">
+        </td>
+    </tr>
+</table>
+</html>
+
+<!--DOM = Document Object Model-->

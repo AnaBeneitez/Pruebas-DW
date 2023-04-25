@@ -1,0 +1,39 @@
+<script>
+    function insertRow() {
+       var tbody = document.getElementsByTagName("tbody")[0]
+       var row = tbody.insertRow()
+       row.setAttribute("id", "row" + parseInt(tbody.rows.length -1))
+       for (var i = 0; i < document.getElementsByTagName("tr")[0].cells.length; i++) {
+        var cell = row.insertCell()
+        cell.setAttribute("id", "cell" + i)
+        cell.innerHTML = "Cell " + (i + 1)
+      }
+    }
+    function deleteRow() {        
+        if(document.getElementsByTagName("tbody")[0].rows.length) {
+            document.getElementById("row" + parseInt(document.getElementsByTagName("tbody")[0].rows.length - 1)).remove()
+        } else {
+            alert("No hay filas para borrar!")
+        }
+    }
+</script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TP</title>
+    </head>
+    <body>
+        <table style="border: 1px solid">
+            <thead>
+                <tr>
+                    <th>Header 1</th>
+                    <th>Header 2</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <br>
+        <button onclick="insertRow()">Insert row</button>
+        <button onclick="deleteRow()">Delete row</button>
+    </body>
+</html>

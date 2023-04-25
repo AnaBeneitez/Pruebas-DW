@@ -1,0 +1,51 @@
+<script>
+    function insertarTexto() {
+        var p = document.getElementsByClassName("test")[0]
+        p.innerHTML = "Hello World"
+    }
+    function insertarTodaClase() {
+        var ps = document.getElementsByClassName("test")
+        for (var i = 0; i < ps.length; i++) {
+            ps[i].innerHTML = "Hello World"
+        }
+    }
+    function getByName() {
+        document.getElementsByName('first name')[0].value = 'by name'
+    }
+    function getByClassName() {
+        document.getElementsByClassName("formClass")[0].value = "by class name"
+    }
+    function getByTagName() {
+        var htmlCollection = document.getElementsByTagName('span')
+        var elements = Array.from(htmlCollection)
+        elements.forEach(function(element) {
+            element.innerHTML = 'by tag name'
+        })
+    }
+    function getBySelector() {
+        document.querySelector('h1, h2').innerHTML = 'by selector'
+    }
+    function getBySelectorAll() {
+        var htmlCollection = document.querySelectorAll('h1, h2')
+        var elements = Array.from(htmlCollection)
+        elements.forEach(function(element) {
+            element.innerHTML = 'by selector all'
+        })
+    }
+</script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TP</title>
+    </head>
+    <body>
+        <p class="test">Antes del click</p>
+        <p class="test">Antes del click</p>
+        <p class="test">Antes del click</p>
+        <p class="test">Antes del click</p>
+    </body>
+    <button onclick="insertarTexto()">Press me</button>
+    <br>
+    <br>
+    <button onclick="insertarTodaClase()">Todo</button>
+</html>
