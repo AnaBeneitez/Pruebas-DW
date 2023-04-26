@@ -10,13 +10,10 @@
         }
     }
     function getByName() {
-        document.getElementsByName('first name')[0].value = 'by name'
-    }
-    function getByClassName() {
-        document.getElementsByClassName("formClass")[0].value = "by class name"
+        document.getElementsByName('nombre')[0].innerHTML = 'by name'
     }
     function getByTagName() {
-        var htmlCollection = document.getElementsByTagName('span')
+        var htmlCollection = document.getElementsByTagName('p')
         var elements = Array.from(htmlCollection)
         elements.forEach(function(element) {
             element.innerHTML = 'by tag name'
@@ -27,11 +24,39 @@
     }
     function getBySelectorAll() {
         var htmlCollection = document.querySelectorAll('h1, h2')
-        var elements = Array.from(htmlCollection)
-        elements.forEach(function(element) {
+        //var elements = Array.from(htmlCollection)
+        htmlCollection.forEach(function(element) {
             element.innerHTML = 'by selector all'
         })
     }
+    var cars = ['Saab', 'Volvo', 'BMW']
+    var fruits = new Array ('Apple', 'Orange', 'Strawberry')
+
+
+    for(i = 0; i < cars.length; i++) {
+        console.log(cars[i])
+    }
+
+
+    /*document.getElementById("demo").innerText = cars[0]
+    cars[0] = 'Peugeot'
+
+    document.getElementById("demo").innerHTML = cars
+    document.getElementById("demo").innerHTML = typeof(cars)
+    cars[3] = {firstName: 'John', lastName: 'Doe'}
+    document.getElementById("demo").innerHTML = cars*/
+    console.log(fruits.length)
+    console.log(fruits[fruits.length - 1])
+    fruits.push('Banana')
+    fruits[fruits.length] = 'Lemon'
+
+    for(i = 0; i < fruits.length; i++) {
+        console.log(fruits[i])
+    }
+    fruits.forEach(fruit => {
+        console.log(fruit)
+    })
+
 </script>
 <!DOCTYPE html>
 <html>
@@ -39,12 +64,16 @@
         <title>TP</title>
     </head>
     <body>
+        <p class="test" name="nombre">Antes del click</p>
+        <p class="test" id="demo">Antes del click</p>
         <p class="test">Antes del click</p>
         <p class="test">Antes del click</p>
-        <p class="test">Antes del click</p>
-        <p class="test">Antes del click</p>
+        <h1>Hola</h1>
+        <h2>chau</h2>
+        <h1>Hola?</h1>
+        <h2>Chau?</h2>
     </body>
-    <button onclick="insertarTexto()">Press me</button>
+    <button onclick="getBySelectorAll()">Press me</button>
     <br>
     <br>
     <button onclick="insertarTodaClase()">Todo</button>

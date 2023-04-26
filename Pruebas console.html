@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <script>
+    var cars = ['Saab', 'Volvo', 'BMW']
+    var fruits = new Array ('Apple', 'Orange', 'strawberry')
+
+   /* document.getElementById("demo").innerHTML = cars[0]
+    cars[0] = 'Peugeot'
+
+    document.getElementById("demo").innerHTML = cars
+    document.getElementById("demo").innerHTML = typeof(cars)
+    cars[3] = {firstName: 'John', lastName: 'Doe'}
+    document.getElementById("demo").innerHTML = cars*/
+    console.log(fruits.length)
+    console.log(fruits[fruits.length - 1])
+    fruits.push('Banana')
+    fruits[fruits.length] = 'Lemon'
+
+    for(i = 0; i < fruits.length; i++) {
+        console.log(fruits[i])
+    }
+    fruits.forEach(fruit => {
+        console.log(fruit)
+    })
+    </script>
+</html>
