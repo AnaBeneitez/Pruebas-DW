@@ -5,12 +5,63 @@
         var fruits = ['Banana', 'Orange', 'Apple', 'Mango']
 
         console.log(Array.isArray(fruits))
+
+        console.log(fruits instanceof Array)
+
         if(fruits instanceof Array) console.log(true)
         else console.log(false)
+        
         document.getElementById('demo').innerHTML = fruits
         document.getElementById('demo').innerHTML = fruits.toString()
         document.getElementById('demo').innerHTML = fruits.join(' | ')
 
-        var fr
+        console.log(fruits)
+        var fruit = fruits.pop()
+
+        console.log(fruits)
+        console.log(fruit)
+        fruits.push('Lemon')
+
+        console.log(fruits)
+        var fruit = fruits.shift()
+
+        console.log(fruits)
+        console.log(fruit)
+        fruits.unshift('Banana')
+
+        console.log(fruits)
+        console.log(fruit)
+        delete fruits[0]
+
+        console.log(fruits)
+        console.log(fruit)
+
+        var items = fruits.splice(2,0,'Kiwi', 'Pinapple')
+        var items2 = fruits.splice(0,1)
+        var somefruits = fruits.slice(3)
+
+        console.log(items)
+        console.log(items2)
+        console.log(somefruits)
+
+        fruits.sort()
+        console.log(fruits)
+
+        fruits.reverse()
+        console.log(fruits)
+
+        var person1 = {firstName: 'Lewis', lastName: 'Ziggy'}
+        var person2 = {firstName: 'John', lastName: 'Doe'}
+
+        var personArray = {person1, person2}
+
+        console.log(person1)
+        console.log(person2)
+        console.log(personArray)
+        
+        personArray.sort (function(a,b) {
+            return (b.lastName < a.firstName) ? 1: -1
+        })
+
     </script>
 </html>
