@@ -1,26 +1,16 @@
 <!DOCTYPE html>
 <html>
+    <p id="demo"></p>
     <script>
-    var cars = ['Saab', 'Volvo', 'BMW']
-    var fruits = new Array ('Apple', 'Orange', 'strawberry')
+        var fruits = ['Banana', 'Orange', 'Apple', 'Mango']
 
-   /* document.getElementById("demo").innerHTML = cars[0]
-    cars[0] = 'Peugeot'
+        console.log(Array.isArray(fruits))
+        if(fruits instanceof Array) console.log(true)
+        else console.log(false)
+        document.getElementById('demo').innerHTML = fruits
+        document.getElementById('demo').innerHTML = fruits.toString()
+        document.getElementById('demo').innerHTML = fruits.join(' | ')
 
-    document.getElementById("demo").innerHTML = cars
-    document.getElementById("demo").innerHTML = typeof(cars)
-    cars[3] = {firstName: 'John', lastName: 'Doe'}
-    document.getElementById("demo").innerHTML = cars*/
-    console.log(fruits.length)
-    console.log(fruits[fruits.length - 1])
-    fruits.push('Banana')
-    fruits[fruits.length] = 'Lemon'
-
-    for(i = 0; i < fruits.length; i++) {
-        console.log(fruits[i])
-    }
-    fruits.forEach(fruit => {
-        console.log(fruit)
-    })
+        var fr
     </script>
 </html>
