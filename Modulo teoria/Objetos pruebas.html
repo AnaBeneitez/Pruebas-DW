@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <script>
+        function Person(firstName, lastName) 
+        {
+            this.firstName = firstName
+            this.lastName = lastName
+        }
+
+        var Employee = function (employeeId, firstName, lastName, birthdate)
+        {
+            this.employeeId = employeeId
+            this.firstName = firstName
+            this.lastName = lastName
+            this.birthdate = birthdate
+            this.fullName = function ()
+            {
+                return this.firstName + ' ' + this.lastName
+            }
+            this.getAge = function (birthdate)
+            {
+                let hoy = new Date()
+                let fechaNacimiento = new Date(dateString)
+                let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
+                let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
+                if (
+                    diferenciaMeses < 0 ||
+                    (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
+                    ) {
+                    edad--
+                    }
+                    return edad
+
+            }                 
+        }
+
+        Employee.prototype.getEmployeeId = function()
+        {
+            return this.employeeId
+        }
+
+        var employee = new Employee()
+        employee.employeeId = 1
+        employee.firstName = 'John'
+        employee.lastName = 'Doe'
+
+        var employee2 = new Employee(2,'Ana', 'Beneitez')
+
+        console.log(employee, employee2)
+        console.log('Full name is: ' + employee2.fullName()) 
+        console.log('Employee ID is: ' + employee2.getEmployeeId())
+    </script>
+</html>
