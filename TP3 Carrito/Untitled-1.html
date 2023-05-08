@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <script>
+        window.onload = () => {
+            var listado = new Listado (document.getElementById("listado"));
+            listado.cargarListado();
+            var carrito = new Carrito (document,getElementById("carrito"));
+        };
+        
+        class Producto {
+            constructor(nombre, descripcion, precio) {
+                this.nombre = nombre;
+                this.descripcion = descripcion;
+                this.precio = precio;
+                this.cantidad = 0;
+            };
+        };
+
+        class Listado {
+            constructor(htmlElement) {
+                this.htmlElement = htmlElement;
+                this.productos = [
+                    new Producto("yerba", "500 grs", 400),
+                    new Producto("azucar", "1 kg", 500),
+                    new Producto("galletitas", "250 grs", 200),
+                ]
+            }
+
+            cargarListado() {
+                for(var i = 0; i < this.productos.length; i++) {
+                    var producto = document.createElement("div");
+                    var titulo = document.createElement("h3");
+                    this.htmlElement.appendChild(producto);
+                    producto.appendChild(titulo);
+                    titulo.innerHTML = this.productos[i].nombre;
+                    var descrip = document.createElement("h5");
+                    descrip.innerHTML = this.productos[i].descripcion;
+                    producto.appendChild(descrip);
+                    var precio = document.createElement("h5");
+                    precio.innerHTML = this.productos[i].precio;
+                    producto.appendChild(precio);
+                    var agregarCarrito = document.createElement("button");
+                    agregarCarrito.innerHTML = "Agregar" 
+                    agregarCarrito.addEventListener("click", agregarItemCarrito)
+                    producto.appendChild(agregarCarrito);   
+                }
+            }
+
+        }
+
+        class Carrito {
+            constructor(htmlElement) {
+                this.htmlElement = htmlElement;
+                this.items = [];
+            }
+        }
+    </script>
+    <head>
+
+    </head>
+    <body>
+        <div id="listado">
+        </div>
+        <div>
+            <h2>Carrito</h2>
+            <ul id="carrito">
+            </ul>
+        </div>
+    </body>
+</html>
