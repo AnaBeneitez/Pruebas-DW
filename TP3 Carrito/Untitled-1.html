@@ -5,6 +5,7 @@
             var listado = new Listado (document.getElementById("listado"));
             listado.cargarListado();
             var carrito = new Carrito (document,getElementById("carrito"));
+            carrito.mostrarCarrito();
         };
         
         class Producto {
@@ -28,6 +29,7 @@
 
             cargarListado() {
                 for(var i = 0; i < this.productos.length; i++) {
+                    var iProducto = this.productos[i];
                     var producto = document.createElement("div");
                     var titulo = document.createElement("h3");
                     this.htmlElement.appendChild(producto);
@@ -41,7 +43,7 @@
                     producto.appendChild(precio);
                     var agregarCarrito = document.createElement("button");
                     agregarCarrito.innerHTML = "Agregar" 
-                    agregarCarrito.addEventListener("click", agregarItemCarrito)
+                    agregarCarrito.addEventListener("click", agregarCarrito)
                     producto.appendChild(agregarCarrito);   
                 }
             }
@@ -53,7 +55,27 @@
                 this.htmlElement = htmlElement;
                 this.items = [];
             }
+            mostrarCarrito() {
+                for(var i = 0; i < this.items.length; i++) {
+                    var producto = document.createElement("div");
+                    var titulo = document.createElement("h3");
+                    this.htmlElement.appendChild(producto);
+                    producto.appendChild(titulo);
+                    titulo.innerHTML = this.items[i].nombre;
+                    var descrip = document.createElement("h5");
+                    descrip.innerHTML = this.items[i].descripcion;
+                    producto.appendChild(descrip);
+                    var precio = document.createElement("h5");
+                    precio.innerHTML = this.items[i].precio;
+                    producto.appendChild(precio);
+                }
+            }
+
+            agregarCarrito(p) {
+                this.items.push(p);
+            }
         }
+
     </script>
     <head>
 
