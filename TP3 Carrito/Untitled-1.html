@@ -42,6 +42,7 @@
                     precio.innerHTML = this.productos[i].precio;
                     producto.appendChild(precio);
                     var agregarCarrito = document.createElement("button");
+                    agregarCarrito.id = this.productos[i].nombre;
                     agregarCarrito.innerHTML = "Agregar" 
                     agregarCarrito.addEventListener("click", agregarCarrito)
                     producto.appendChild(agregarCarrito);   
@@ -72,6 +73,7 @@
             }
 
             agregarCarrito(p) {
+                
                 this.items.push(p);
             }
         }
