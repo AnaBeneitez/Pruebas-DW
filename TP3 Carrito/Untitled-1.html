@@ -9,8 +9,8 @@
         };
         
         class Producto {
-            constructor(nombre, descripcion, precio) {
-                this.nombre = nombre;
+            constructor(id, descripcion, precio) {
+                this.id = id;
                 this.descripcion = descripcion;
                 this.precio = precio;
                 this.cantidad = 0;
@@ -34,7 +34,7 @@
                     var titulo = document.createElement("h3");
                     this.htmlElement.appendChild(producto);
                     producto.appendChild(titulo);
-                    titulo.innerHTML = this.productos[i].nombre;
+                    titulo.innerHTML = this.productos[i].id;
                     var descrip = document.createElement("h5");
                     descrip.innerHTML = this.productos[i].descripcion;
                     producto.appendChild(descrip);
@@ -42,7 +42,7 @@
                     precio.innerHTML = this.productos[i].precio;
                     producto.appendChild(precio);
                     var agregarCarrito = document.createElement("button");
-                    agregarCarrito.id = this.productos[i].nombre;
+                    agregarCarrito.id = this.productos[i].id;
                     agregarCarrito.innerHTML = "Agregar" 
                     agregarCarrito.addEventListener("click", agregarCarrito)
                     producto.appendChild(agregarCarrito);   
@@ -62,7 +62,7 @@
                     var titulo = document.createElement("h3");
                     this.htmlElement.appendChild(producto);
                     producto.appendChild(titulo);
-                    titulo.innerHTML = this.items[i].nombre;
+                    titulo.innerHTML = this.items[i].id;
                     var descrip = document.createElement("h5");
                     descrip.innerHTML = this.items[i].descripcion;
                     producto.appendChild(descrip);
@@ -72,9 +72,13 @@
                 }
             }
 
-            agregarCarrito(p) {
+            agregarCarrito() {
                 
-                this.items.push(p);
+                arreglo.forEach(p => {
+                    if(p.id == id) {
+                        this.items.push(p);
+                    }
+                })             
             }
         }
 
