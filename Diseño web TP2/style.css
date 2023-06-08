@@ -55,7 +55,8 @@ section.rightcolumn {
 }
 
 .card {
-    background-color: rgb(80, 255, 176);
+    border: 1px solid #c23dff;
+    background-color: rgb(188, 239, 255);
     padding: 20px;
     margin: 20px;
 }
