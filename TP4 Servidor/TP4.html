@@ -8,7 +8,7 @@
     <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
     <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
     <script>
-        const url = 'http://1bdd-2800-2245-9000-4b4-6e25-e5b2-b951-4c59.ngrok-free.app';
+        const url = 'http://1bdd-2800-2245-9000-4b4-6e25-e5b2-b951-4c59.ngrok-free.app/student';
 
         window.onload = function() {
             $('#popUp').hide();
@@ -20,7 +20,7 @@
         function loadStudents(){
             return new Promise(function(resolve, reject){
                 var request = new XMLHttpRequest();
-                request.open('GET', url + '/student/getAll');
+                request.open('GET', url + '/getAll');
                 request.responseType = 'json';
                 request.onload = function(){
                     if(request.status == 200){
