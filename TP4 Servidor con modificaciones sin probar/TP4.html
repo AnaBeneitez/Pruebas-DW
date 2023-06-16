@@ -9,7 +9,7 @@
     <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
     <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
     <script>
-        const url = 'https://084f-181-231-122-56.ngrok-free.app/student';
+        const url = 'https://3c04-181-231-122-56.ngrok-free.app/student';
 
         window.onload = function() {
             $('#popUp').hide();
@@ -233,7 +233,7 @@
         }
 
         function getStudentByDni(dni) {
-            searchStudent(dni).then(() => {
+            searchStudent(dni).then((response) => {
                 var student = JSON.stringify({
                     'id': response.id,
                     'dni': response.dni,
@@ -253,14 +253,22 @@
                 response.forEach(e => {
                     if(e.dni == dni) {
                         encontrado = true;
-                        var student = JSON.stringify({
-                            'id': e.id,
-                            'dni': e.dni,
-                            'lastName': e.lastName,
-                            'firstName': e.firstName,
-                            'email': e.email,
-                        })
-                        viewStudent(student);
+                        // var student = JSON.stringify({
+                        //     'id': e.id,
+                        //     'dni': e.dni,
+                        //     'lastName': e.lastName,
+                        //     'firstName': e.firstName,
+                        //     'email': e.email,
+                        // })
+                        document.getElementsByName('id2')[0].value = e.id;
+                        document.getElementsByName('dni2')[0].value = e.dni;
+                        document.getElementsByName('lastName2')[0].value = e.lastName;
+                        document.getElementsByName('firstName2')[0].value = e.firstName;
+                        document.getElementsByName('email2')[0].value = e.email;
+                        $('#popUp').dialog({
+                            closeText: ''
+                        }).css ('font-size', '15px');
+                            // viewStudent(student);
                     }
                 })
                 if(!encontrado) {
@@ -269,6 +277,7 @@
             }).catch((reason) => {
                 console.error(reason);
             })
+            document.getElementById('searchDni').value = '';
         }
 
     </script>
