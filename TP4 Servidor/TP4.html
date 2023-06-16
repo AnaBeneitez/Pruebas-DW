@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel='stylesheet' href='https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css'>
     <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
     <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
     <script>
-        const url = 'http://1bdd-2800-2245-9000-4b4-6e25-e5b2-b951-4c59.ngrok-free.app/student';
+        const url = 'https://a210-181-231-122-56.ngrok-free.app/student';
 
         window.onload = function() {
             $('#popUp').hide();
@@ -17,20 +18,19 @@
 
         //Promesas
 
-        function loadStudents(){
-            return new Promise(function(resolve, reject){
+        function loadStudents() {
+            return new Promise(function(resolve, reject) {
                 var request = new XMLHttpRequest();
                 request.open('GET', url + '/getAll');
                 request.responseType = 'json';
-                request.onload = function(){
+                request.onload = function() {
                     if(request.status == 200){
                         resolve(request.response);
-                    }
-                    else{
-                        reject(Error('Error' + request.statusText));
+                    } else{
+                        reject(Error(request.statusText));
                     }
                 }
-                request.onerror = function(){
+                request.onerror = function() {
                     reject(Error("Error network"));
                 }
                 request.send();
@@ -45,7 +45,7 @@
                 var student = JSON.stringify({
                     'dni': document.getElementById('dni').value,
                     'lastName': document.getElementById('lastName').value,
-                    'firstName': document.getElementById('firstname').value,
+                    'firstName': document.getElementById('firstName').value,
                     'email': document.getElementById('email').value,
                     'cohort': '0',
                     'status': 'activo',
@@ -57,8 +57,11 @@
                     if(request.status == 201) {
                         resolve(request.response);
                     }else {
-                        reject(Error('Error: unexpected network error.'));
+                        reject(Error(request.statusText));
                     }
+                }
+                request.onerror = function() {
+                    reject(Error('Error: unexpected network error.'))
                 }
                 request.send(student);
             })
@@ -119,7 +122,7 @@
         function getStudents() {
 
             loadStudents()
-                .then((response) => {
+                .then(response => {
                     var tbody = document.querySelector('tbody');
                     tbody.innerHTML = '';
                     response.forEach(e => {
@@ -137,16 +140,16 @@
                         var student = JSON.stringify({
                             'id': e.id,
                             'dni': e.dni,
-                            'lasName': e.lastName,
+                            'lastName': e.lastName,
                             'firstName': e.firstName,
                             'email': e.email,
                         })
                         var view = row.insertCell();
-                        view.innerHTML = '<button onclick="viewStudent('+student+')">View</button>';
+                        view.innerHTML = `<button onclick='viewStudent(${student})'>View</button>`;
                         var del = row.insertCell();
-                        del.innerHTML = "<button onclick='deleteStudent("+e.id+")'>Delete</button>";
+                        del.innerHTML = `<button onclick='deleteStudent(${e.id})'>Delete</button>`;
                     });
-                    document.getElementById('id').value = '';
+                    document.getElementById('dni').value = '';
                     document.getElementById('lastName').value = '';
                     document.getElementById('firstName').value = '';
                     document.getElementById('email').value = '';
@@ -214,6 +217,7 @@
                 <th style='text-align: left'>Last Name</th>
                 <th style='text-align: left'>First Name</th>
                 <th style='text-align: left'>Email</th>
+                <th colspan='2'></th>
             </tr>
         </thead>
         <tbody>      
@@ -241,7 +245,7 @@
             </tr>
             <tr>
                 <td><label for="lastName2" style="font-weight: bold">Last Name</label></td>
-                <td><input name="lasName2" style="text-align: right" /></td>
+                <td><input name="lastName2" style="text-align: right" /></td>
             </tr>
             <tr>
                 <td><label for="firstName2" style="font-weight: bold">First Name</label></td>
