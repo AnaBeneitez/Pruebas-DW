@@ -150,6 +150,7 @@
                         var id = row.insertCell();
                         id.innerHTML = e.id;
                         var dni = row.insertCell();
+                        dni.setAttribute('name', 'dni')
                         dni.innerHTML = e.dni;
                         var lastName = row.insertCell();
                         lastName.innerHTML = e.lastName;
@@ -280,6 +281,22 @@
             document.getElementById('searchDni').value = '';
         }
 
+        function buscarPorDni(dni) {
+            var tbody = document.getElementsByName('tbody')[0];
+            for(i = 0; i < tbody.rows.length; i++) {
+                if(tbody.row[i].dni == dni) {
+                    var student = JSON.stringify({
+                            'id': tbody.row[i].id,
+                            'dni': tbody.row[i].dni,
+                            'lastName': tbody.row[i].lastName,
+                            'firstName': tbody.row[i].firstName,
+                            'email': tbody.row[i].email,
+                        });
+                    viewStudent(student);
+                };
+            };
+        };
+
     </script>
 </head>
 <body>
@@ -309,7 +326,7 @@
     </table>
     <div id="search">
         <h1><input id="searchDni" style="text-align: right"></h1>
-        <h1 style="text-align: left"><button onclick="buscarEstudiante(document.getElementById('searchDni').value)">Search Student</button></h1>
+        <h1 style="text-align: left"><button onclick="buscarPorDni(document.getElementById('searchDni').value)">Search Student</button></h1>
     </div>
     <div id="popUp">
         <table>
