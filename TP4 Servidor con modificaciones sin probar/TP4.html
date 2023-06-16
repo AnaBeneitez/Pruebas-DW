@@ -9,7 +9,7 @@
     <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
     <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
     <script>
-        const url = 'https://a210-181-231-122-56.ngrok-free.app/student';
+        const url = 'https://084f-181-231-122-56.ngrok-free.app/student';
 
         window.onload = function() {
             $('#popUp').hide();
@@ -70,7 +70,6 @@
         function removeStudent(id) {
             return new Promise (function(resolve, reject) {
                 var request = new XMLHttpRequest();
-                //request.open('POST', url + '/'+id+'/delete');
                 request.open('POST', url +`/${id}/delete`);
                 request.setRequestHeader('Content-Type', 'application/json');
                 request.onload = function() {
@@ -117,6 +116,24 @@
             })
         }
       
+        function searchStudent(dni) {
+            return new Promise (function(resolve, reject) {
+                var request = new XMLHttpRequest();
+                request.open('GET', url + `/dni/${dni}`)
+                request.responseType = 'json';
+                request.onload = function() {
+                    if(request.status == 200) {
+                        resolve(request.response);
+                    } else {
+                        reject(Error(request.statusText));
+                    }
+                }
+                request.onerror = function() {
+                    reject(Error('Error network'));
+                }
+                request.send();
+            })
+        }
 
         //Funciones que consumen las promesas
 
@@ -126,6 +143,7 @@
                 .then(response => {
                     var tbody = document.querySelector('tbody');
                     tbody.innerHTML = '';
+                    var contador = 0;
                     response.forEach(e => {
                         contador++;
                         var row = tbody.insertRow();
@@ -151,6 +169,10 @@
                         var del = row.insertCell();
                         del.innerHTML = `<button onclick='deleteStudent(${e.id})'>Delete</button>`;
                     });
+
+                    var total = tbody.insertRow();
+                    total.setAttribute('colspan', '7');
+                    total.innerHTML = `Cantidad total de alumnos: ${contador}`;
 
                     document.getElementById('dni').value = '';
                     document.getElementById('lastName').value = '';
@@ -178,6 +200,7 @@
 
         function deleteStudent(id) {
             removeStudent(id).then(() => {
+                $('#popUp').dialog('close');
                 getStudents();
             }).catch(reason => {
                 console.error(reason);
@@ -209,6 +232,45 @@
             }
         }
 
+        function getStudentByDni(dni) {
+            searchStudent(dni).then(() => {
+                var student = JSON.stringify({
+                    'id': response.id,
+                    'dni': response.dni,
+                    'lastName': response.lastName,
+                    'firstName': response.firstName,
+                    'email': response.email,
+                })
+                viewStudent(student);
+            }).catch (reason => {
+                console.error(reason);
+            })
+        }
+
+        function buscarEstudiante(dni) {
+            var encontrado = false;
+            loadStudents().then(response => {
+                response.forEach(e => {
+                    if(e.dni == dni) {
+                        encontrado = true;
+                        var student = JSON.stringify({
+                            'id': e.id,
+                            'dni': e.dni,
+                            'lastName': e.lastName,
+                            'firstName': e.firstName,
+                            'email': e.email,
+                        })
+                        viewStudent(student);
+                    }
+                })
+                if(!encontrado) {
+                    alert('El DNI no existe en la base de datos');
+                }
+            }).catch((reason) => {
+                console.error(reason);
+            })
+        }
+
     </script>
 </head>
 <body>
@@ -236,6 +298,10 @@
             </tr>
         </tfoot>
     </table>
+    <div id="search">
+        <h1><input id="searchDni" style="text-align: right"></h1>
+        <h1 style="text-align: left"><button onclick="buscarEstudiante(document.getElementById('searchDni').value)">Search Student</button></h1>
+    </div>
     <div id="popUp">
         <table>
             <tr>
@@ -259,7 +325,8 @@
                 <td><input name="email2" style="text-align: right" /></td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: center"><button onclick="updateStudent()">Update</button></td>
+                <td style="text-align: right"><button onclick="updateStudent()">Update</button></td>
+                <td style="text-align: left;"><button onclick="deleteStudent(document.getElementsByName('id2')[0].value)">Delete</button></td>
             </tr>
         </table>
     </div>
