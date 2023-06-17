@@ -116,24 +116,6 @@
             })
         }
       
-        function searchStudent(dni) {
-            return new Promise (function(resolve, reject) {
-                var request = new XMLHttpRequest();
-                request.open('GET', url + `/dni/${dni}`)
-                request.responseType = 'json';
-                request.onload = function() {
-                    if(request.status == 200) {
-                        resolve(request.response);
-                    } else {
-                        reject(Error(request.statusText));
-                    }
-                }
-                request.onerror = function() {
-                    reject(Error('Error network'));
-                }
-                request.send();
-            })
-        }
 
         //Funciones que consumen las promesas
 
@@ -233,68 +215,26 @@
             }
         }
 
-        function getStudentByDni(dni) {
-            searchStudent(dni).then((response) => {
-                var student = JSON.stringify({
-                    'id': response.id,
-                    'dni': response.dni,
-                    'lastName': response.lastName,
-                    'firstName': response.firstName,
-                    'email': response.email,
-                })
-                viewStudent(student);
-            }).catch (reason => {
-                console.error(reason);
-            })
-        }
-
-        function buscarEstudiante(dni) {
-            var encontrado = false;
-            loadStudents().then(response => {
-                response.forEach(e => {
-                    if(e.dni == dni) {
-                        encontrado = true;
-                        // var student = JSON.stringify({
-                        //     'id': e.id,
-                        //     'dni': e.dni,
-                        //     'lastName': e.lastName,
-                        //     'firstName': e.firstName,
-                        //     'email': e.email,
-                        // })
-                        document.getElementsByName('id2')[0].value = e.id;
-                        document.getElementsByName('dni2')[0].value = e.dni;
-                        document.getElementsByName('lastName2')[0].value = e.lastName;
-                        document.getElementsByName('firstName2')[0].value = e.firstName;
-                        document.getElementsByName('email2')[0].value = e.email;
-                        $('#popUp').dialog({
-                            closeText: ''
-                        }).css ('font-size', '15px');
-                            // viewStudent(student);
-                    }
-                })
-                if(!encontrado) {
-                    alert('El DNI no existe en la base de datos');
-                }
-            }).catch((reason) => {
-                console.error(reason);
-            })
-            document.getElementById('searchDni').value = '';
-        }
-
         function buscarPorDni(dni) {
-            var tbody = document.getElementsByName('tbody')[0];
-            for(i = 0; i < tbody.rows.length; i++) {
-                if(tbody.row[i].dni == dni) {
-                    var student = JSON.stringify({
-                            'id': tbody.row[i].id,
-                            'dni': tbody.row[i].dni,
-                            'lastName': tbody.row[i].lastName,
-                            'firstName': tbody.row[i].firstName,
-                            'email': tbody.row[i].email,
-                        });
-                    viewStudent(student);
+            var tbody = document.getElementsByTagName('tbody')[0];
+            var encontrado = false;
+            for(i = 0; i < tbody.rows.length - 1 && !encontrado; i++) {
+                if(tbody.rows[i].cells[1].innerHTML == dni) {
+                    document.getElementsByName('id2')[0].value = tbody.rows[i].cells[0].innerHTML;
+                    document.getElementsByName('dni2')[0].value = tbody.rows[i].cells[1].innerHTML;
+                    document.getElementsByName('lastName2')[0].value = tbody.rows[i].cells[2].innerHTML;
+                    document.getElementsByName('firstName2')[0].value = tbody.rows[i].cells[3].innerHTML;
+                    document.getElementsByName('email2')[0].value = tbody.rows[i].cells[4].innerHTML;
+                    $('#popUp').dialog({
+                        closeText: ''
+                    }).css ('font-size', '15px');
+                    encontrado = true;
                 };
             };
+            document.getElementById('searchDni').value = '';
+            if(!encontrado) {
+                    alert('El DNI ingresado no existe en la base de datos');
+                }
         };
 
     </script>
