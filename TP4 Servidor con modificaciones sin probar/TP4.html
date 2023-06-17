@@ -120,9 +120,7 @@
         //Funciones que consumen las promesas
 
         function getStudents() {
-
-            loadStudents()
-                .then(response => {
+            loadStudents().then(response => {
                     var tbody = document.querySelector('tbody');
                     tbody.innerHTML = '';
                     var contador = 0;
@@ -153,8 +151,7 @@
                         del.innerHTML = `<button onclick='deleteStudent(${e.id})'>Delete</button>`;
                     });
 
-                    var total = tbody.insertRow();
-                    total.setAttribute('colspan', '7');
+                    var total = document.getElementById('cantAlumnos');
                     total.innerHTML = `Cantidad total de alumnos: ${contador}`;
 
                     document.getElementById('dni').value = '';
@@ -215,10 +212,10 @@
             }
         }
 
-        function buscarPorDni(dni) {
+        function searchByDni(dni) {
             var tbody = document.getElementsByTagName('tbody')[0];
             var encontrado = false;
-            for(i = 0; i < tbody.rows.length - 1 && !encontrado; i++) {
+            for(i = 0; i < tbody.rows.length && !encontrado; i++) {
                 if(tbody.rows[i].cells[1].innerHTML == dni) {
                     document.getElementsByName('id2')[0].value = tbody.rows[i].cells[0].innerHTML;
                     document.getElementsByName('dni2')[0].value = tbody.rows[i].cells[1].innerHTML;
@@ -264,9 +261,10 @@
             </tr>
         </tfoot>
     </table>
+    <h3 id="cantAlumnos">Cantidad de alumnos: </h3>
     <div id="search">
         <h1><input id="searchDni" style="text-align: right"></h1>
-        <h1 style="text-align: left"><button onclick="buscarPorDni(document.getElementById('searchDni').value)">Search Student</button></h1>
+        <h1 style="text-align: left"><button onclick="searchByDni(document.getElementById('searchDni').value)">Search Student</button></h1>
     </div>
     <div id="popUp">
         <table>
