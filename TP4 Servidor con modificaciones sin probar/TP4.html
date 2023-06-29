@@ -9,7 +9,7 @@
     <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
     <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
     <script>
-        const url = 'https://3c04-181-231-122-56.ngrok-free.app/student';
+        const url = 'https://8fd0-181-231-122-56.ngrok-free.app/student';
 
         window.onload = function() {
             $('#popUp').hide();
@@ -180,7 +180,9 @@
 
         function deleteStudent(id) {
             removeStudent(id).then(() => {
-                $('#popUp').dialog('close');
+                if ($('#popUp').is(':visible')) {
+                    $('#popUp').dialog('close');
+                }
                 getStudents();
             }).catch(reason => {
                 console.error(reason);
