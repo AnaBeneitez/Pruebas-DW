@@ -1,0 +1,33 @@
+* {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.tabla {    
+    border: 1px rgb(86, 0, 143);
+    text-align: center;
+    background-color: rgb(222, 164, 255);
+ }
+ .encabezadoTabla {
+    color: rgb(151, 59, 255);
+    font-weight: bold;
+ }
+ .boton {
+    color: rgb(151, 59, 255);
+    text-align: center;
+    background: radial-gradient(white, rgb(197, 197, 197));
+    font-weight: bold;
+ }
+ .conteo {
+    color: white;
+    background-color:rgb(86, 0, 143);
+    text-align: center;
+ }
+ .ventana {
+    border: 1px solid fuchsia;
+    color: rgb(0, 0, 0);
+    background-color:rgb(255, 188, 255);
+    text-align: right;
+ }
+ .etiquetaVentana {
+    font-weight: bold;
+ }

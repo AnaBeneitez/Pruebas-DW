@@ -3,13 +3,121 @@
     <head>
     <title>Alumnos</title>
     <link rel='stylesheet' href='https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css'>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
     <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
     <script>
+        const url= 'https://3f09-181-231-122-56.ngrok-free.app/student';
+        
+        window.onload = function() {
+            $('#ventana').hide();
+            mostrarAlumnos();
+        }
+
+        function obtenerAlumnos() {
+            return new Promise(function (resolve, reject) {
+                var solicitud = new XMLHttpRequest();
+                solicitud.open('GET', url + '/getAll');
+                solicitud.responseType = 'json';
+                solicitud.onload = function() {
+                    if(solicitud.status == 200) {
+                        resolve(solicitud.response);
+                    }else {
+                        reject(Error(solicitud.statusText));
+                    }
+                }
+                solicitud.onerror = function() {
+                    reject(Error('Error de conexión'));
+                }
+                solicitud.send();
+            });
+        }
+
+
+        function mostrarAlumnos() {
+            obtenerAlumnos().then(response => {
+                var tabla = document.querySelector('tbody');
+                tabla.innerHTML = '';
+                var cantAlumnos = 0;
+                response.forEach(estudiante => {
+                    cantAlumnos++;
+                    var alumno = tabla.insertRow();
+                    var id = alumno.insertCell();
+                    id.innerHTML = estudiante.id;
+                    var dni = alumno.insertCell();
+                    dni.innerHTML = estudiante.dni;
+                    var apellido = alumno.insertCell();
+                    apellido.innerHTML = estudiante.lastName;
+                    var nombre = alumno.insertCell();
+                    nombre.innerHTML = estudiante.firstName;
+                    var correo = alumno.insertCell();
+                    correo.innerHTML = estudiante.email;
+                    
+                });
+            })
+            .catch((reason) => {
+                    console.log(reason);
+                });
+        }
 
     </script>
     </head>
     <body>
-        
+        <table class="tabla">
+            <thead class="encabezadoTabla">
+                <tr>
+                    <th>Id</th>
+                    <th>DNI</th>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                    <th>Correo electrónico</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td><input id="dni"/></td>
+                    <td><input id="apellido"/></td>
+                    <td><input id="nombre"/></td>
+                    <td><input id="correo"/></td>
+                    <td colspan="2"><button class="boton" onclick="guardarAlumno()">Agregar alumno</button></td>
+                </tr>
+                <tr class="conteo">
+                    <td colspan="7">Cantidad total de alumnos: </td>
+                </tr>
+                <tr class="conteo">
+                    <td colspan="7"><input id="buscarDni"/><button class="boton">Buscar DNI</button></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div id="ventana">
+            <table class="ventana">
+                <tr>
+                    <td><label for="idVentana" class="etiquetaVentana">Id</label></td>
+                    <td><input id="idVentana" readonly></td>
+                </tr>
+                <tr>
+                    <td><label for="dniVentana" class="etiquetaVentana">DNI</label></td>
+                    <td><input id="dniVentana"></td>
+                </tr>
+                <tr>
+                    <td><label for="apellidoVentana" class="etiquetaVentana">Apellido</label></td>
+                    <td><input id="apellidoVentana"></td>
+                </tr>
+                <tr>
+                    <td><label for="nombreVentana" class="etiquetaVentana">Nombre</label></td>
+                    <td><input id="nombreVentana"></td>
+                </tr>
+                <tr>
+                    <td><label for="correoVentana" class="etiquetaVentana">Correo electrónico</label></td>
+                    <td><input id="correoVentana"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;"><button class="boton" onclick="modificarAlumno()">Modificar</button>&nbsp;&nbsp;&nbsp;<button class="boton" onclick="eliminarAlumno(document.getestudiantesByName('idVentana')[0].value)">Eliminar</button></td>
+                </tr>
+            </table>
+        </div>
     </body>
 </html>
