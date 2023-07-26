@@ -1,21 +1,27 @@
 * {
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .tabla {    
-    border: 1px rgb(86, 0, 143);
+    border: 3px rgb(86, 0, 143);
     text-align: center;
     background-color: rgb(222, 164, 255);
  }
  .encabezadoTabla {
-    color: rgb(151, 59, 255);
+    color: rgb(86, 0, 143);
     font-weight: bold;
  }
  .boton {
-    color: rgb(151, 59, 255);
+    color: rgb(86, 0, 143);
     text-align: center;
     background: radial-gradient(white, rgb(197, 197, 197));
     font-weight: bold;
+ }
+ .botonVentana {
+   color: rgb(221, 0, 125);
+   text-align: center;
+   background: radial-gradient(white, rgb(197, 197, 197));
+   font-weight: bold;
  }
  .conteo {
     color: white;
@@ -23,7 +29,7 @@
     text-align: center;
  }
  .ventana {
-    border: 1px solid fuchsia;
+    border: 1px solid rgb(221, 0, 125);
     color: rgb(0, 0, 0);
     background-color:rgb(255, 188, 255);
     text-align: right;
