@@ -45,7 +45,7 @@ th {
 
  }
  .botonVentana {
-   color: rgb(221, 0, 125);
+   color: rgb(4, 80, 61);
    text-align: center;
    background: radial-gradient(white, rgb(197, 197, 197));
    font-weight: bold;
@@ -57,9 +57,9 @@ th {
     padding-left: 0px;
  }
  .ventana {
-    border: 1px solid rgb(221, 0, 125);
+    border: 1px solid rgb(4, 80, 61);
     color: rgb(0, 0, 0);
-    background-color:rgb(255, 188, 255);
+    background-color:rgb(219, 255, 246);
     text-align: right;
  }
  .etiquetaVentana {

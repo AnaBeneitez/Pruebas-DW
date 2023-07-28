@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Alumnos</title>
+    <title>Listado de alumnos</title>
     <link rel='stylesheet' href='https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css'>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
@@ -148,10 +148,6 @@
                 var total = document.getElementById('cantAlumnos');
                 total.innerHTML = `Cantidad total de alumnos: ${cantAlumnos}`;
 
-                document.getElementById('dni').value = '';
-                document.getElementById('apellido').value = '';
-                document.getElementById('nombre').value = '';
-                document.getElementById('correo').value = '';
                 document.getElementById('dni').focus();
             })
             .catch((mensaje) => {
@@ -166,14 +162,24 @@
                 document.getElementById('nombre').value.trim() !== '' &&
                 document.getElementById('correo').value.trim() !== ''
                 ) {
-                    agregarAlumno().then(() => {
-                        mostrarAlumnos();
-                    }).catch (mensaje => {
-                        console.log(Error(mensaje));
-                    })
+                    var opcion = false;
+                    opcion = confirm(`¿Está seguro que desea agregar este alumno al registro?\n\nDNI: ${document.getElementById('dni').value}\nApellido: ${document.getElementById('apellido').value}\nNombre: ${document.getElementById('nombre').value}\nCorreo: ${document.getElementById('correo').value}`)
+
+                    if(opcion) {
+                        agregarAlumno().then(() => {
+                            mostrarAlumnos();
+                        }).catch (mensaje => {
+                            console.log(Error(mensaje));
+                        })
+                    }
             }else {
                 alert('Falta completar algún campo obligatorio.');
             }
+            document.getElementById('dni').value = '';
+            document.getElementById('apellido').value = '';
+            document.getElementById('nombre').value = '';
+            document.getElementById('correo').value = '';
+            document.getElementById('dni').focus();
         }
 
         function borrarAlumno(id) {
@@ -190,6 +196,9 @@
                     console.log(Error(mensaje));
                 })
             }
+            if($('#ventana').is(':visible')) {
+                $('#ventana').dialog('close');
+            }
         }
 
         function actualizarAlumno() {
@@ -204,12 +213,12 @@
 
                 if(opcion) {
                     modificarAlumno().then(() => {
-                        $('#ventana').dialog('close');
                         mostrarAlumnos();
                     }).catch(mensaje => {
                         console.log(Error(mensaje));
                     })
                 }
+                $('#ventana').dialog('close');
             }else {
                 alert('Falta completar algún campo obligatorio.');
             }
@@ -224,7 +233,7 @@
 
             $('#ventana').dialog({
                 closeText: ''
-            }).css('font-size', '13px');
+            }).css('font-size', '12px');
         }
 
         function buscarPorDni(dni) {
@@ -241,7 +250,7 @@
                     document.getElementById('correoVentana').value = tabla.rows[i].cells[4].innerHTML;
                     $('#ventana').dialog({
                         closeText: ''
-                    }).css('font-size', '13px');
+                    }).css('font-size', '12px');
                     encontrado = true;
                 }
             }
@@ -267,7 +276,7 @@
             </thead>
             <tbody></tbody>
             <tfoot>
-                <tr>
+                <tr class="celdaBoton">
                     <td></td>
                     <td><input id="dni"/></td>
                     <td><input id="apellido"/></td>
