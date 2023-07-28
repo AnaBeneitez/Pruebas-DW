@@ -7,7 +7,7 @@
     <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
     <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
     <script>
-        const url= 'https://5cf1-2800-2245-9080-5f9-6590-be67-313e-1a16.ngrok-free.app/student';
+        const url= 'https://bbcb-181-231-122-56.ngrok-free.app/student';
         
         window.onload = function() {
             $('#ventana').hide();
@@ -139,8 +139,10 @@
                         'email': estudiante.email,
                     })
                     var vista = alumno.insertCell();
+                    vista.setAttribute('class', 'celdaBoton');
                     vista.innerHTML = `<button class='boton' onclick='verAlumno(${vistaAlumno})'>Ver</button>`;
                     var borrar = alumno.insertCell();
+                    borrar.setAttribute('class', 'celdaBoton');
                     borrar.innerHTML = `<button class='boton' onclick='borrarAlumno(${estudiante.id})'>Eliminar</button>`;
                 });
                 var total = document.getElementById('cantAlumnos');
@@ -231,6 +233,7 @@
             
             for(i = 0; i < tabla.rows.length && !encontrado; i++) {
                 if(tabla.rows[i].cells[1].innerHTML == dni) {
+                    
                     document.getElementById('idVentana').value = tabla.rows[i].cells[0].innerHTML;
                     document.getElementById('dniVentana').value = tabla.rows[i].cells[1].innerHTML;
                     document.getElementById('apellidoVentana').value = tabla.rows[i].cells[2].innerHTML;
@@ -270,13 +273,13 @@
                     <td><input id="apellido"/></td>
                     <td><input id="nombre"/></td>
                     <td><input id="correo"/></td>
-                    <td colspan="2"><button class="boton" onclick="guardarAlumno()">Agregar alumno</button></td>
+                    <td colspan="2" class="celdaBoton"><button class="boton" onclick="guardarAlumno()">Agregar alumno</button></td>
                 </tr>
                 <tr class="conteo">
                     <td id="cantAlumnos" colspan="7">Cantidad total de alumnos: </td>
                 </tr>
                 <tr class="conteo">
-                    <td colspan="7"><input id="buscarDni"/><button class="boton" onclick="buscarPorDni(document.getElementById('buscarDni').value)">Buscar DNI</button></td>
+                    <td colspan="7"><input id="buscarDni"/>&nbsp;&nbsp;&nbsp;<button class="boton" onclick="buscarPorDni(document.getElementById('buscarDni').value)">Buscar DNI</button></td>
                 </tr>
             </tfoot>
         </table>

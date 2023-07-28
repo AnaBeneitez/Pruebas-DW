@@ -2,20 +2,47 @@
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+table {
+   width: 100%;
+   border: 1px solid #000;
+}
+th, td {
+   vertical-align: top;
+   border: 1px solid #000;
+   border-collapse: collapse;
+   padding: 0.3em;
+   caption-side: bottom;
+}
+caption {
+   padding: 0.3em;
+   color: #fff;
+    background: #000;
+}
+th {
+   background: rgb(222, 164, 255);;
+}
+
 .tabla {    
     border: 3px rgb(86, 0, 143);
-    text-align: center;
-    background-color: rgb(222, 164, 255);
+    text-align: left;
+    background-color: #eed7fd;
+    padding-left: 0px;
  }
  .encabezadoTabla {
     color: rgb(86, 0, 143);
     font-weight: bold;
+    padding-left: 0px;
+    text-align: center;
  }
+.celdaBoton {
+   text-align: center;
+}
  .boton {
     color: rgb(86, 0, 143);
     text-align: center;
     background: radial-gradient(white, rgb(197, 197, 197));
     font-weight: bold;
+
  }
  .botonVentana {
    color: rgb(221, 0, 125);
@@ -27,6 +54,7 @@
     color: white;
     background-color:rgb(86, 0, 143);
     text-align: center;
+    padding-left: 0px;
  }
  .ventana {
     border: 1px solid rgb(221, 0, 125);
